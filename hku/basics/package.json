@@ -1,0 +1,23 @@
+{
+  "name": "basics",
+  "version": "1.0.0",
+  "description": "This is a test directory to handle node",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dsmith111/React-mini-projects.git"
+  },
+  "author": "David Smith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dsmith111/React-mini-projects/issues"
+  },
+  "homepage": "https://github.com/dsmith111/React-mini-projects#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "lite-server": "^2.5.4"
+  }
+}
