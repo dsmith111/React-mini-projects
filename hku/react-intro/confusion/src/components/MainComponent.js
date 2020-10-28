@@ -36,7 +36,9 @@ class Main extends Component {
           ratio = {this.state.ratio} />
           <DishDetail
           dish ={this.state.dishes.filter(
-            (dish) => dish.id === this.state.selectedDish)[0]} />
+            (dish) => dish.id === this.state.selectedDish)[0]}
+          image_width = {this.state.image_width}
+          ratio = {this.state.ratio} />
         </div>
     </div>
 

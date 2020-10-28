@@ -1,19 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Card, CardImg, CardText, CardBody, CardTitle} from 'reactstrap';
 
 
-class DishDetail extends Component{
-
-  constructor(props){
-    super(props);
-    this.state ={
-      ratio: 1.75,
-      image_width: 200
-
-    };
-  }
-
-  organizeComments(comments){
+  function OrganizeComments({comments}){
     if (comments != null){
       const commentBlock = comments.map((comment) => {
         let date_new = new Date(Date.parse(comment.date));
@@ -35,8 +24,7 @@ class DishDetail extends Component{
       return (<div></div>);
     }
   }
-  renderDish(dish){
-    {console.log(`rendering ${dish}`)}
+  function RenderDish({dish, image_width, ratio}){
     if(dish != null){
       return(
         <div className ="row">
@@ -45,8 +33,8 @@ class DishDetail extends Component{
               <CardImg
                src={dish.image}
                alt={dish.name}
-               width = {this.state.image_width}
-               height = {this.state.image_width*this.state.ratio}
+               width = {image_width}
+               height = {image_width*ratio}
                />
               <CardBody>
                 <CardTitle ><h5>{dish.name}</h5></CardTitle>
@@ -58,7 +46,7 @@ class DishDetail extends Component{
             <Card className = "border-0">
               <CardBody>
                 <CardTitle ><h4 >Comments </h4> </CardTitle>
-                <CardText>{this.organizeComments(dish.comments)}</CardText>
+                <CardText> <OrganizeComments comments = {dish.comments} /> </CardText>
               </CardBody>
             </Card>
 
@@ -73,13 +61,15 @@ class DishDetail extends Component{
     }
   }
 
-  render(){
-    return(
-        this.renderDish(this.props.dish)
-    );
-  }
+  const DishDetail = (props) => {
+      return(
+          <RenderDish
+        dish = {props.dish}
+        image_width = {props.image_width}
+        ratio = {props.ratio} />
+      );
+    }
 
-}
 
 
 export default DishDetail;
