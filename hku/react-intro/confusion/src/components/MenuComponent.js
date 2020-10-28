@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle} from 'reactstrap';
+import {Card, CardImg, CardImgOverlay, CardTitle} from 'reactstrap';
+import DishDetail from './DishdetailComponent';
 
 class Menu extends Component {
 
@@ -14,34 +15,12 @@ class Menu extends Component {
   onDishSelect(dish){
     this.setState({selectedDish: dish});
   }
-  renderDish(dish){
-    if(dish != null){
-      return(
-          <Card>
-            <CardImg
-             src={dish.image}
-             alt={dish.name}
-             width = {this.state.image_width}
-             height = {this.state.image_width*this.state.ratio*3}
-             />
-            <CardBody>
-              <CardTitle >{dish.name}</CardTitle>
-              <CardText>{dish.description}</CardText>
-            </CardBody>
-          </Card>
-      );
-    }
-    else{
-      return(
-        <div></div>
-      );
-    }
-  }
+
   render(){
 
     const menu = this.props.dishes.map((dish) => {
       return (
-        <div key = {dish.id} className="col-10 col-md-5 m-1">
+        <div key = {dish.id} className="col-12 col-md-5 m-1">
           <Card onClick={() => this.onDishSelect(dish)}>
             <CardImg
              src={dish.image}
@@ -50,7 +29,7 @@ class Menu extends Component {
              height = {this.state.image_width*this.state.ratio}
              />
             <CardImgOverlay>
-              <CardTitle >{dish.name}</CardTitle>
+              <CardTitle ><strong >{dish.name}</strong></CardTitle>
             </CardImgOverlay>
           </Card>
         </div>
@@ -62,9 +41,7 @@ class Menu extends Component {
         <div className="row">
             {menu}
         </div>
-        <div className="row">
-          {this.renderDish(this.state.selectedDish)}
-        </div>
+        <DishDetail selectedDish = {this.state.selectedDish} />
       </div>
     );
   }
