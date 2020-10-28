@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle} from 'reactstrap';
+import {Card, CardImg, CardText, CardBody, CardTitle} from 'reactstrap';
 
 
 class DishDetail extends Component{
@@ -16,8 +16,10 @@ class DishDetail extends Component{
   organizeComments(comments){
     if (comments != null){
       const commentBlock = comments.map((comment) => {
-        let date_new = new Date(comment.date).toDateString().slice(4,);
-        date_new = date_new.slice(0,6) +','+ date_new.slice(6,);
+        let date_new = new Date(Date.parse(comment.date));
+        date_new = new Intl.DateTimeFormat('en-US',
+              {year: 'numeric', month:'short', day:'2-digit'}).format(date_new);
+
         return(
           <div key= {comment.id}>
             <ul className="list-unstyled">
@@ -34,6 +36,7 @@ class DishDetail extends Component{
     }
   }
   renderDish(dish){
+    {console.log(`rendering ${dish}`)}
     if(dish != null){
       return(
         <div className ="row">
@@ -72,7 +75,7 @@ class DishDetail extends Component{
 
   render(){
     return(
-        this.renderDish(this.props.selectedDish)
+        this.renderDish(this.props.dish)
     );
   }
 
