@@ -1,5 +1,6 @@
 import React from 'react';
-import {Card, CardImg, CardText, CardBody, CardTitle} from 'reactstrap';
+import {Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import {Link} from 'react-router-dom';
 
 
   function OrganizeComments({comments}){
@@ -24,7 +25,8 @@ import {Card, CardImg, CardText, CardBody, CardTitle} from 'reactstrap';
       return (<div></div>);
     }
   }
-  function RenderDish({dish, image_width, ratio}){
+  function RenderDish({dish, comments, image_width, ratio}){
+    console.log(comments);
     if(dish != null){
       return(
         <div className ="row">
@@ -46,7 +48,7 @@ import {Card, CardImg, CardText, CardBody, CardTitle} from 'reactstrap';
             <Card className = "border-0">
               <CardBody>
                 <CardTitle ><h4 >Comments </h4> </CardTitle>
-                <CardText> <OrganizeComments comments = {dish.comments} /> </CardText>
+                <CardText> <OrganizeComments comments = {comments} /> </CardText>
               </CardBody>
             </Card>
 
@@ -63,10 +65,24 @@ import {Card, CardImg, CardText, CardBody, CardTitle} from 'reactstrap';
 
   const DishDetail = (props) => {
       return(
-          <RenderDish
-        dish = {props.dish}
-        image_width = {props.image_width}
-        ratio = {props.ratio} />
+        <React.Fragment>
+          <div className="row">
+            <Breadcrumb>
+              <BreadcrumbItem>
+                <Link to='/menu'>Menu</Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+            </Breadcrumb>
+            <div className="col-12">
+              <h3>{props.dish.name}</h3>
+            </div>
+          </div>
+            <RenderDish
+          dish = {props.dish}
+          comments = {props.comments}
+          image_width = {props.image_width}
+          ratio = {props.ratio} />
+          </React.Fragment>
       );
     }
 
